@@ -10,7 +10,7 @@ import AccountPage from "./pages/account-page"
 import OrderDetailPage from "./pages/order-detail-page"
 import Header from "./components/header"
 import Footer from "./components/footer"
-import HomePage from "./pages/homePage"
+import HomePage from "./pages/HomePage"
 
 export default function App() {
   return (
