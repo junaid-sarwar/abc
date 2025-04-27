@@ -39,6 +39,13 @@ function ProductCard({ product }) {
           alt={product.name}
           className="w-full aspect-square object-cover"
         />
+
+        {/* VTON Button */}
+        <button className="absolute top-2 right-2 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1 rounded-md shadow-md z-10">
+          VTON
+        </button>
+
+        {/* View Details Overlay on Hover */}
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
           <Link
             to={`/product/${product.id}`}
@@ -48,6 +55,7 @@ function ProductCard({ product }) {
           </Link>
         </div>
       </div>
+
       <div className="p-4">
         <div className="flex justify-between items-start">
           <div>

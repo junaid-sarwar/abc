@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "./context/auth-context"
 import ProtectedRoute from "./components/protected-route"
-import ProductPage from "./pages/product-page"
+// import ProductPage from "./pages/product-page"
 import ShopPage from "./pages/shop-page"
 import CartPage from "./pages/cart-page"
 import LoginPage from "./pages/login-page"
@@ -10,6 +10,7 @@ import AccountPage from "./pages/account-page"
 import OrderDetailPage from "./pages/order-detail-page"
 import Header from "./components/header"
 import Footer from "./components/footer"
+import HomePage from "./pages/homePage"
 
 export default function App() {
   return (
@@ -20,9 +21,9 @@ export default function App() {
           <div className="flex-grow pt-24">
             {/* Added padding-top to account for fixed header */}
             <Routes>
-              <Route path="/" element={<ShopPage />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/shop" element={<ShopPage />} />
-              <Route path="/product/:id" element={<ProductPage />} />
+              {/* <Route path="/product/:id" element={<ProductPage />} /> */}
               <Route path="/cart" element={<CartPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />

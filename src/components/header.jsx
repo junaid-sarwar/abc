@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { ShoppingCart, X, Sun, Moon } from "lucide-react"
+import LogoPic from '../assets/souqh-no-bg-logo.png'
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -42,20 +43,19 @@ export default function Header() {
     <>
       {/* Fixed header container with glassmorphism */}
       <header className="fixed top-0 left-0 right-0 z-50">
-        <div className={`backdrop-blur-md bg-black/50 transition-all duration-300 ${isScrolled ? "shadow-lg" : ""}`}>
+        <div className={`backdrop-blur-md bg-white/50 transition-all duration-300 ${isScrolled ? "shadow-lg" : ""}`}>
           <div className="container mx-auto px-4 md:px-8 lg:px-12 py-4 flex justify-between items-center max-w-[1920px]">
             {/* Logo - Left Side with background - Scrolls with page */}
             <div
-              className={`relative z-10 mt-2 bg-black p-3 rounded-md transition-all duration-300 ${
-                isScrolled ? "transform translate-y-0" : ""
-              }`}
+              className={`relative z-10 mt-2  p-3 rounded-md transition-all duration-300 ${isScrolled ? "transform translate-y-0" : ""
+                }`}
             >
               <Link to="/" className="block">
                 {isScrolled ? (
                   /* Scrolled Logo - Arabic version */
                   <div className="h-12 w-auto">
                     <img
-                      src="/placeholder.svg?height=48&width=160&text=SOUQH+Arabic"
+                      src={LogoPic}
                       alt="SOUQH Logo"
                       className="h-full w-auto object-contain"
                     />
@@ -64,7 +64,7 @@ export default function Header() {
                   /* Default Logo - English version */
                   <div className="h-12 w-auto">
                     <img
-                      src="/placeholder.svg?height=48&width=160&text=SOUQH+English"
+                      src={LogoPic}
                       alt="SOUQH Logo"
                       className="h-full w-auto object-contain"
                     />
@@ -77,13 +77,18 @@ export default function Header() {
             <div className="hidden lg:flex items-center absolute right-[180px] top-1/2 transform -translate-y-1/2">
               <nav>
                 <ul className="flex items-center">
-                  {["SHOP", "WHOLESALE", "CATERING", "DONATE"].map((item, index) => (
-                    <li key={item} className="relative group px-5">
+                  {[
+                    { name: "SHOP", path: "/shop" },
+                    { name: "CART", path: "/cart" },
+                    { name: "ACCOUNT", path: "/account" },
+                    { name: "ORDERS", path: "/order-detail-page" }
+                  ].map((item) => (
+                    <li key={item.name} className="relative group px-5">
                       <Link
-                        to={"/" + item.toLowerCase().replace(/ /g, "-")}
-                        className="font-medium text-white hover:text-yellow-400 transition-colors py-2 inline-block whitespace-nowrap"
+                        to={item.path}
+                        className="font-medium text-black hover:text-yellow-400 transition-colors py-2 inline-block whitespace-nowrap"
                       >
-                        {item}
+                        {item.name}
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
                       </Link>
                     </li>
@@ -92,15 +97,15 @@ export default function Header() {
               </nav>
             </div>
 
+
             {/* Cart and Menu with background - Scrolls with page */}
             <div
-              className={`relative z-10 flex items-center bg-black p-2 rounded-md transition-all duration-300 ${
-                isScrolled ? "transform translate-y-0" : ""
-              }`}
+              className={`relative z-10 flex items-center bg-transparent p-2 rounded-md transition-all duration-300 ${isScrolled ? "transform translate-y-0" : ""
+                }`}
             >
               {/* Cart Button */}
               <Link to="/cart" className="p-2 relative">
-                <ShoppingCart className="h-6 w-6 text-white" />
+                <ShoppingCart className="h-6 w-6 text-black" />
                 <span className="absolute -top-1 -right-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs rounded-full h-5 w-5 flex items-center justify-center">
                   0
                 </span>
@@ -110,8 +115,8 @@ export default function Header() {
               <div className="flex items-center">
                 <button className="p-2 ml-1" onClick={() => setIsMenuOpen(true)} aria-label="Open menu">
                   <div className="w-6 flex flex-col items-center justify-center">
-                    <span className="block w-6 h-0.5 bg-white mb-1.5"></span>
-                    <span className="block w-6 h-0.5 bg-white"></span>
+                    <span className="block w-6 h-0.5 bg-black mb-1.5"></span>
+                    <span className="block w-6 h-0.5 bg-black"></span>
                   </div>
                 </button>
               </div>
@@ -131,7 +136,7 @@ export default function Header() {
                 <Link to="/" className="block">
                   <div className="h-12 w-auto">
                     <img
-                      src="/placeholder.svg?height=48&width=160&text=SOUQH+English"
+                      src={LogoPic}
                       alt="SOUQH Logo"
                       className="h-full w-auto object-contain"
                     />
@@ -167,22 +172,28 @@ export default function Header() {
               {/* Main Navigation Links - Right Aligned */}
               <div className="container mx-auto px-4 md:px-8 lg:px-12 py-8 flex-1 max-w-[1920px]">
                 <ul className="text-right space-y-4">
-                  {["SHOP", "WHOLESALE", "CATERING", "IMPACT", "STORIES", "ABOUT", "CONTACT", "DONATE", "SIGN IN"].map(
-                    (item) => (
-                      <li key={item}>
-                        <Link
-                          to={"/" + item.toLowerCase().replace(/ /g, "-")}
-                          className="text-4xl md:text-6xl font-bold hover:text-yellow-400 transition-colors inline-block relative group"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {item}
-                          <span className="absolute bottom-2 right-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 group-hover:w-full transition-all duration-300 ease-in-out origin-right"></span>
-                        </Link>
-                      </li>
-                    ),
-                  )}
+                  {[
+                    { name: "SHOP", path: "/shop" },
+                    { name: "CART", path: "/cart" },
+                    { name: "ACCOUNT", path: "/account" },
+                    { name: "ORDERS", path: "/order-detail-page" },
+                    { name: "LOGIN", path: "/login" },
+                    { name: "SIGN UP", path: "/signup" }
+                  ].map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        to={item.path}
+                        className="text-4xl md:text-6xl font-bold hover:text-yellow-400 transition-colors inline-block relative group"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.name}
+                        <span className="absolute bottom-2 right-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 group-hover:w-full transition-all duration-300 ease-in-out origin-right"></span>
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
+
 
               {/* Footer Links - Three Columns */}
               <div className="container mx-auto px-4 md:px-8 lg:px-12 py-8 mt-auto max-w-[1920px]">
@@ -198,7 +209,7 @@ export default function Header() {
                       <li>
                         <Link
                           to="#"
-                          className="text-white text-lg hover:text-yellow-400 transition-colors relative group inline-block"
+                          className="text-black text-lg hover:text-yellow-400 transition-colors relative group inline-block"
                         >
                           Facebook
                           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -207,7 +218,7 @@ export default function Header() {
                       <li>
                         <Link
                           to="#"
-                          className="text-white text-lg hover:text-yellow-400 transition-colors relative group inline-block"
+                          className="text-black text-lg hover:text-yellow-400 transition-colors relative group inline-block"
                         >
                           Instagram
                           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -216,7 +227,7 @@ export default function Header() {
                       <li>
                         <Link
                           to="#"
-                          className="text-white text-lg hover:text-yellow-400 transition-colors relative group inline-block"
+                          className="text-black text-lg hover:text-yellow-400 transition-colors relative group inline-block"
                         >
                           Twitter
                           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -225,7 +236,7 @@ export default function Header() {
                       <li>
                         <Link
                           to="#"
-                          className="text-white text-lg hover:text-yellow-400 transition-colors relative group inline-block"
+                          className="text-black text-lg hover:text-yellow-400 transition-colors relative group inline-block"
                         >
                           LinkedIn
                           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -234,7 +245,7 @@ export default function Header() {
                       <li>
                         <Link
                           to="#"
-                          className="text-white text-lg hover:text-yellow-400 transition-colors relative group inline-block"
+                          className="text-black text-lg hover:text-yellow-400 transition-colors relative group inline-block"
                         >
                           YouTube
                           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -254,7 +265,7 @@ export default function Header() {
                       <li>
                         <Link
                           to="#"
-                          className="text-white text-lg hover:text-yellow-400 transition-colors relative group inline-block"
+                          className="text-black text-lg hover:text-yellow-400 transition-colors relative group inline-block"
                         >
                           Good
                           <br />
@@ -267,7 +278,7 @@ export default function Header() {
                       <li>
                         <Link
                           to="#"
-                          className="text-white text-lg hover:text-yellow-400 transition-colors relative group inline-block"
+                          className="text-black text-lg hover:text-yellow-400 transition-colors relative group inline-block"
                         >
                           Good Food
                           <br />
@@ -278,7 +289,7 @@ export default function Header() {
                       <li>
                         <Link
                           to="#"
-                          className="text-white text-lg hover:text-yellow-400 transition-colors relative group inline-block"
+                          className="text-black text-lg hover:text-yellow-400 transition-colors relative group inline-block"
                         >
                           Good
                           <br />
@@ -300,7 +311,7 @@ export default function Header() {
                       <li>
                         <Link
                           to="#"
-                          className="text-white text-lg hover:text-yellow-400 transition-colors relative group inline-block"
+                          className="text-black text-lg hover:text-yellow-400 transition-colors relative group inline-block"
                         >
                           Pathways
                           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 group-hover:w-full transition-all duration-300 ease-in-out"></span>
